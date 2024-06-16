@@ -33,7 +33,6 @@ pipeline {
         stage('Plan'){
             steps{
                 sh """
-                    pwd
                     cd terraform
                     terraform plan -var="app_version=${params.appVersion}"
                 """
@@ -44,10 +43,10 @@ pipeline {
             steps{
                 sh """
                     cd terraform
-                    terraform apply -auto-approve -var="app_version=${params.appVersion}"
+                    terraform apply --auto-approve -var="app_version=${params.appVersion}" 
                 """
             }
-        }
+        }        
     }
     post { 
         always { 
